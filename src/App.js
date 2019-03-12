@@ -1,6 +1,23 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import logo from './logo.svg'
+import './App.css'
+import { createStore } from 'redux'
+
+const initialMovies = {
+  movies: [
+    'Rambo III', 'Hakerzy', 'Matrix'
+  ]
+}
+
+function movies(state = initialMovies, action) {
+  switch (action.type) {
+    default:
+      return state
+  }
+}
+
+const store = createStore(movies)
+window.store = store
 
 class App extends Component {
   render() {
