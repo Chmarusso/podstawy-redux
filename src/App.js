@@ -4,6 +4,7 @@ import './App.css'
 import { createStore } from 'redux'
 
 const initialMovies = {
+  listName: 'Favourite',
   movies: [
     'Rambo III', 'Hakerzy', 'Matrix'
   ]
@@ -11,6 +12,14 @@ const initialMovies = {
 
 function movies(state = initialMovies, action) {
   switch (action.type) {
+    case 'ADD':
+      return {
+        ...state, movies: [...state.movies, action.movie]
+      }
+    case 'RESET':
+      return {
+        ...state, movies: []
+      }
     default:
       return state
   }
