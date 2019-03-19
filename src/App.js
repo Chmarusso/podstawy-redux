@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
 import { createStore } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
 
 const initialMovies = {
   listName: 'Favourite',
@@ -25,7 +26,7 @@ function movies(state = initialMovies, action) {
   }
 }
 
-const store = createStore(movies)
+const store = createStore(movies, composeWithDevTools())
 window.store = store
 
 class App extends Component {
