@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
-import { createStore, combineReducers } from 'redux'
+import { createStore, combineReducers, bindActionCreators } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 const initialMovies = {
@@ -52,6 +52,15 @@ const reducer = combineReducers({movies, actors})
 
 const store = createStore(reducer, composeWithDevTools())
 window.store = store
+
+store.dispatch({type: 'ADD_ACTOR', item: 'Cezary Pazura'})
+
+const addActor = item => ({type: 'ADD_ACTOR', item})
+
+store.dispatch(addActor('Borys Szyc'))
+
+const creators = bindActionCreators({addActor}, store.dispatch)
+creators.addActor('Jan Frycz')
 
 
 class App extends Component {
