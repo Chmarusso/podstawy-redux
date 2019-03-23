@@ -1,66 +1,14 @@
 import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
-import { createStore, combineReducers, bindActionCreators } from 'redux'
+import { createStore } from 'redux'
+import rootReducer from './reducers'
 import { composeWithDevTools } from 'redux-devtools-extension'
+import { movieActions } from './app/movies/duck'
 
-const initialMovies = {
-  listName: 'Favourite',
-  list: [
-    'Rambo III', 'Hakerzy', 'Matrix'
-  ]
-}
-
-const initialActors = {
-  listName: 'Best',
-  list: [
-    'Tom Hanks', 'Julia Roberts', 'Angelina Jolie'
-  ]
-}
-
-function movies(state = initialMovies, action) {
-  switch (action.type) {
-    case 'ADD_MOVIE':
-      return {
-        ...state, list: [...state.list, action.item]
-      }
-    case 'RESET_MOVIES':
-      return {
-        ...state, list: []
-      }
-    default:
-      return state
-  }
-}
-
-function actors(state = initialActors, action) {
-  switch (action.type) {
-    case 'ADD_ACTOR':
-      return {
-        ...state, list: [...state.list, action.item]
-      }
-    case 'RESET_ACTORS':
-      return {
-        ...state, list: []
-      }
-    default:
-      return state
-  }
-}
-
-const reducer = combineReducers({movies, actors})
-
-const store = createStore(reducer, composeWithDevTools())
+const store = createStore(rootReducer, composeWithDevTools())
 window.store = store
-
-store.dispatch({type: 'ADD_ACTOR', item: 'Cezary Pazura'})
-
-const addActor = item => ({type: 'ADD_ACTOR', item})
-
-store.dispatch(addActor('Borys Szyc'))
-
-const creators = bindActionCreators({addActor}, store.dispatch)
-creators.addActor('Jan Frycz')
+store.dispatch(movieActions.add('Matrix 2'))
 
 
 class App extends Component {
