@@ -3,9 +3,7 @@ import types from './types'
 
 const INITIAL_STATE = {
   listName: 'Favourite',
-  list: [
-    'Rambo III', 'Hakerzy', 'Matrix'
-  ]
+  list: []
 }
 
 const moviesReducer = (state = INITIAL_STATE, action) => {
